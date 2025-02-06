@@ -26,6 +26,10 @@ interface DeleteDocumentRequest {
     documentId: string;
 }
 
+interface QueryDocumentsRequest {
+    query: string;
+}
+
 interface CreateCollectionResponse {
     message: string;
 }
@@ -49,6 +53,11 @@ interface AddDocumentResponse {
 
 interface DeleteDocumentResponse {
     message: string;
+}
+
+interface QueryDocumentsResponse {
+    ids: ID[];
+    documents: string[];
 }
 
 export const createCollection = async (
@@ -141,4 +150,30 @@ export const deleteDocument = async (
     });
     await collection.delete({ ids: [documentId] });
     return res.json({ message: "Success!" });
+};
+
+export const queryDocuments = async (
+    req: Request<{ collectionName: string }>,
+    res: Response<{ ids: ID[]; documents: string[] }>,
+) => {
+    const { collectionName } = req.params;
+    const q = req.query.q as string;
+
+    try {
+        const collection = await client.getOrCreateCollection({
+            name: collectionName,
+        });
+        const response = await collection.query({
+            queryTexts: [q],
+            nResults: 5,
+        });
+        const ids = response.ids[0] || [];
+        const documents = (response.documents[0] || []).filter(
+            (doc): doc is string => doc !== null,
+        );
+        return res.json({ ids, documents });
+    } catch (error) {
+        console.error("Error querying documents:", error);
+        return res.status(500).json({ ids: [], documents: [] });
+    }
 };
