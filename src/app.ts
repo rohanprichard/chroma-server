@@ -18,6 +18,10 @@ const swaggerDocument = {
             url: "http://localhost:3002",
             description: "Local server",
         },
+        {
+            url: "https://agent-api-vectorstore.ai.amalgamrx.com",
+            description: "Dev server",
+        },
     ],
 
     paths: {
