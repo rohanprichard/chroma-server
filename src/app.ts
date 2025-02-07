@@ -223,7 +223,7 @@ const swaggerDocument = {
         },
         // Tag Query
         "/collections/{collectionName}/query": {
-            get: {
+            post: {
                 tags: ["Query"],
                 summary: "Query documents in a collection using a search term",
                 operationId: "queryDocuments",
@@ -237,16 +237,18 @@ const swaggerDocument = {
                             type: "string",
                         },
                     },
-                    {
-                        name: "q",
-                        in: "query",
-                        required: true,
-                        description: "Search query string",
-                        schema: {
-                            type: "string",
+                ],
+                requestBody: {
+                    description: "Documents to add",
+                    required: true,
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/QueryDocumentsRequest",
+                            },
                         },
                     },
-                ],
+                },
                 responses: {
                     "200": {
                         description: "Query results returned successfully.",
@@ -410,6 +412,15 @@ const swaggerDocument = {
                     },
                 },
                 required: ["message"],
+            },
+            QueryDocumentsRequest: {
+                type: "object",
+                properties: {
+                    query: {
+                        type: "string",
+                    },
+                },
+                required: ["query"],
             },
         },
     },

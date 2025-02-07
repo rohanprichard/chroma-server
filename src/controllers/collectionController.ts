@@ -213,7 +213,7 @@ export const queryDocuments = async (
             return res.status(404).json({ message: "Collection not found" });
         }
         const response = await collection.query({
-            queryTexts: query,
+            queryTexts: [query],
             nResults: 2,
         });
 
