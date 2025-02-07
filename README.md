@@ -14,9 +14,9 @@ The API docs are available using Swagger at [http://localhost:3000/api-docs](htt
 
 1. Clone the repository.
 2. Install dependencies:
-    ````
-    npm install   ```
-    ````
+    ```
+    npm install
+    ```
 
 ## Development
 
@@ -24,6 +24,7 @@ Start the server in development mode with automatic restarts:
 
 ```
 npm run dev
+
 ```
 
 ## Production
