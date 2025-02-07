@@ -7,8 +7,8 @@ services:
       - "3002:3002"
     environment:
       - PORT=3002
-      # This env variable will be used in your Node code.
-      - CHROMADB_URL=http://localhost:8002
+      # Updated: Use the docker-compose service name and internal port for chroma
+      - CHROMADB_URL=http://chroma:8000
     depends_on:
       - chroma
 
