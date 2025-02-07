@@ -17,3 +17,4 @@ services:
     environment:
       - CHROMA_SERVER_CORS_ALLOW_ORIGINS=["http://localhost:3002", "https://agent-api-vectorstore.ai.amalgamrx.com"]
     ports:
+      - "8002:8000"
