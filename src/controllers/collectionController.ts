@@ -1,12 +1,10 @@
 import { Request, Response } from "express";
-import { ChromaClient, Collection, Document, ID } from "chromadb";
-
+import { Collection, Document, ID } from "chromadb";
+import { client } from "../index";
 import { v4 as uuidv4 } from "uuid";
 import dotenv from "dotenv";
 
 dotenv.config();
-
-const client = new ChromaClient({ path: "http://localhost:8000" });
 
 interface CreateCollectionRequest {
     name: string;
@@ -129,7 +127,7 @@ export const addDocument = async (
 ) => {
     try {
         const collectionName = req.params.collectionName;
-        const { document } = req.body;
+        const { document } = req.body; // Metadata
         const collection = await client.getOrCreateCollection({
             name: collectionName,
         });
@@ -215,9 +213,11 @@ export const queryDocuments = async (
             return res.status(404).json({ message: "Collection not found" });
         }
         const response = await collection.query({
-            queryTexts: [query],
-            nResults: 5,
+            queryTexts: query,
+            nResults: 2,
         });
+
+        console.log(response);
         const ids = response.ids[0] || [];
         const documents = (response.documents[0] || []).filter(
             (doc): doc is string => doc !== null,
