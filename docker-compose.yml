@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      # This env variable will be used in your Node code.
+      - CHROMADB_URL=http://chroma:8002
+    depends_on:
+      - chroma
+
+  chroma:
+    image: chromadb/chroma
+    ports:
+      - "8002:8000"
