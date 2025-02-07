@@ -15,6 +15,6 @@ services:
   chroma:
     image: chromadb/chroma
     environment:
-      - CHROMA_SERVER_CORS_ALLOW_ORIGINS=["http://localhost:3002", "https://agent-api-vectorstore.ai.amalgamrx.com"]
+      - CHROMA_SERVER_CORS_ALLOW_ORIGINS=["*"]
     ports:
       - "8002:8000"
