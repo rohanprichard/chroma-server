@@ -21,8 +21,10 @@ const swaggerDocument = {
     ],
 
     paths: {
+        // Tag Collections
         "/collections": {
             get: {
+                tags: ["Collections"],
                 summary: "Retrieve all collections",
                 operationId: "getCollections",
                 responses: {
@@ -40,6 +42,7 @@ const swaggerDocument = {
             },
 
             post: {
+                tags: ["Collections"],
                 summary: "Create a new collection",
                 operationId: "createCollection",
                 requestBody: {
@@ -71,6 +74,7 @@ const swaggerDocument = {
             },
 
             delete: {
+                tags: ["Collections"],
                 summary: "Delete a collection",
                 operationId: "deleteCollection",
                 requestBody: {
@@ -101,8 +105,10 @@ const swaggerDocument = {
                 },
             },
         },
+        // Tag Documents
         "/collections/{collectionName}/documents": {
             get: {
+                tags: ["Documents"],
                 summary: "Retrieve all documents in a collection",
                 operationId: "getDocuments",
                 parameters: [
@@ -130,6 +136,7 @@ const swaggerDocument = {
                 },
             },
             post: {
+                tags: ["Documents"],
                 summary: "Add documents to a collection",
                 operationId: "addDocument",
                 parameters: [
@@ -172,6 +179,7 @@ const swaggerDocument = {
                 },
             },
             delete: {
+                tags: ["Documents"],
                 summary: "Delete a document from a collection",
                 operationId: "deleteDocument",
                 parameters: [
@@ -213,8 +221,10 @@ const swaggerDocument = {
                 },
             },
         },
+        // Tag Query
         "/collections/{collectionName}/query": {
             get: {
+                tags: ["Query"],
                 summary: "Query documents in a collection using a search term",
                 operationId: "queryDocuments",
                 parameters: [
