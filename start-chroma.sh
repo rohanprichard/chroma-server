@@ -1,2 +1,2 @@
 docker pull chromadb/chroma
-docker run -p 8000:8000 chromadb/chroma
+docker run -p 8002:8000 chromadb/chroma
