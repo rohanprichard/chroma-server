@@ -26,6 +26,7 @@ interface DeleteDocumentRequest {
 
 interface QueryDocumentsRequest {
     query: string;
+    nResults: number;
 }
 
 interface CreateCollectionResponse {
@@ -204,7 +205,7 @@ export const queryDocuments = async (
 ) => {
     try {
         const { collectionName } = req.params;
-        const { query } = req.body;
+        const { query, nResults } = req.body;
 
         const collection = await client.getOrCreateCollection({
             name: collectionName,
@@ -214,7 +215,7 @@ export const queryDocuments = async (
         }
         const response = await collection.query({
             queryTexts: [query],
-            nResults: 2,
+            nResults: nResults,
         });
 
         console.log(response);

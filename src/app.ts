@@ -419,8 +419,11 @@ const swaggerDocument = {
                     query: {
                         type: "string",
                     },
+                    nResults: {
+                        type: "number",
+                    },
                 },
-                required: ["query"],
+                required: ["query", "nResults"],
             },
         },
     },
